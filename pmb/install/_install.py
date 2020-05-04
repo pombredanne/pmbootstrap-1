@@ -175,12 +175,14 @@ def set_user(args):
     """
     suffix = "rootfs_" + args.device
     if not pmb.chroot.user_exists(args, args.user, suffix):
-        pmb.chroot.root(args, ["adduser", "-D", "-u", "10000", args.user],
+        # tung
+        pmb.chroot.root(args, ["/bin/busybox", "adduser", "-D", "-u", "10000", args.user],
                         suffix)
         for group in pmb.config.install_user_groups:
-            pmb.chroot.root(args, ["addgroup", "-S", group], suffix,
+            # tung
+            pmb.chroot.root(args, ["/bin/busybox", "addgroup", "-S", group], suffix,
                             check=False)
-            pmb.chroot.root(args, ["addgroup", args.user, group], suffix)
+            pmb.chroot.root(args, ["/bin/busybox", "addgroup", args.user, group], suffix)
 
 
 def setup_login(args):

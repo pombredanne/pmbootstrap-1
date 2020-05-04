@@ -63,7 +63,7 @@ def init(args, suffix="native"):
         pmb.chroot.root(args, ["chmod", "+x", "/usr/local/bin/gzip"], suffix)
 
     # Add user to group abuild
-    pmb.chroot.root(args, ["adduser", "pmos", "abuild"], suffix)
+    pmb.chroot.root(args, ["/bin/busybox", "adduser", "pmos", "abuild"], suffix) # tung
 
     # abuild.conf: Don't clean the build folder after building, so we can
     # inspect it afterwards for debugging

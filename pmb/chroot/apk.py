@@ -54,8 +54,9 @@ def update_repository_list(args, suffix="native", check=False):
     if os.path.exists(path):
         pmb.helpers.run.root(args, ["rm", path])
     for line in lines_new:
-        pmb.helpers.run.root(args, ["sh", "-c", "echo " +
-                                    shlex.quote(line) + " >> " + path])
+        # tung
+        pmb.helpers.run.user(args, ["sh", "-c", "echo " +
+                                    shlex.quote(line) + " | sudo tee -a " + path])
     update_repository_list(args, suffix, True)
 
 
